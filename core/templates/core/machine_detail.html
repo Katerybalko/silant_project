@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+
+{% block title %}Машина {{ machine.serial_number }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="mb-4">Машина {{ machine.serial_number }}</h1>
+
+  <!-- Карточка с данными машины -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+      Основные данные
+    </div>
+    <div class="card-body">
+      <p><strong>Модель техники:</strong> {{ machine.model_tech }}</p>
+      <p><strong>Модель двигателя:</strong> {{ machine.model_engine }}</p>
+      <p><strong>Модель трансмиссии:</strong> {{ machine.model_trans }}</p>
+      <p><strong>Дата отгрузки:</strong> {{ machine.factory_ship_date }}</p>
+      <p><strong>Клиент:</strong> {{ machine.client }}</p>
+      <p><strong>Сервисная компания:</strong> {{ machine.service_company }}</p>
+    </div>
+  </div>
+
+  <!-- ТО -->
+  <h2 class="mt-4">ТО</h2>
+  {% if maintenances %}
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Дата</th>
+            <th>Вид ТО</th>
+            <th>Наработка</th>
+            <th>Организация</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for to in maintenances %}
+          <tr>
+            <td>{{ to.date }}</td>
+            <td>{{ to.to_type }}</td>
+            <td>{{ to.uptime_mh }}</td>
+            <td>{{ to.org }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="text-muted">Нет данных по ТО</p>
+  {% endif %}
+
+  <!-- Рекламации -->
+  <h2 class="mt-5">Рекламации</h2>
+  {% if claims %}
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Дата отказа</th>
+            <th>Узел отказа</th>
+            <th>Способ восстановления</th>
+            <th>Дата восстановления</th>
+            <th>Простой (часы)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in claims %}
+          <tr>
+            <td>{{ c.failure_date }}</td>
+            <td>{{ c.failure_node }}</td>
+            <td>{{ c.recovery_method }}</td>
+            <td>{{ c.recovery_date }}</td>
+            <td>{{ c.downtime_hours }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="text-muted">Нет рекламаций</p>
+  {% endif %}
+
+  <!-- Назад -->
+  <div class="mt-4">
+    <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">← Назад в личный кабинет</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Вход в систему{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white">
+        Вход в систему
+      </div>
+      <div class="card-body">
+        {% if form.errors %}
+          <div class="alert alert-danger">
+            Неверное имя пользователя или пароль. Попробуйте снова.
+          </div>
+        {% endif %}
+
+        <form method="post" action="{% url 'account_login' %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <div class="d-grid mt-3">
+            <button type="submit" class="btn btn-primary">Войти</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

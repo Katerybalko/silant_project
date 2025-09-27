@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Электронная сервисная книжка{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+  <img src="{% static 'img/logo.png' %}" alt="Логотип" style="max-height:100px;" class="mb-3">
+  <h1 class="fw-bold">Электронная сервисная книжка «Мой Силант»</h1>
+</div>
+
+<div class="card shadow-sm p-4 mb-4">
+  <h5 class="mb-3">Проверьте комплектацию и технические характеристики техники Силант</h5>
+
+  <form method="get" class="row g-3">
+    <div class="col-md-8">
+      <input type="text" name="serial" id="serial" class="form-control"
+             placeholder="Введите заводской номер"
+             value="{{ request.GET.serial }}">
+    </div>
+    <div class="col-md-4 d-grid">
+      <button type="submit" class="btn btn-primary">Поиск</button>
+    </div>
+  </form>
+
+  {% if machine %}
+    <div class="alert alert-success mt-4 text-start">
+      <h6 class="fw-bold">Результат поиска:</h6>
+      <p><strong>Серийный номер:</strong> {{ machine.serial_number }}</p>
+      <p><strong>Модель техники:</strong> {{ machine.model_tech }}</p>
+      <p><strong>Двигатель:</strong> {{ machine.model_engine }}</p>
+      <p><strong>Трансмиссия:</strong> {{ machine.model_trans }}</p>
+      <p><strong>Дата отгрузки:</strong> {{ machine.factory_ship_date }}</p>
+      <p><strong>Клиент:</strong> {{ machine.client }}</p>
+      <p><strong>Сервисная компания:</strong> {{ machine.service_company }}</p>
+      <a href="{% url 'machine_detail' machine.pk %}" class="btn btn-outline-primary btn-sm">Подробнее</a>
+    </div>
+  {% elif request.GET.serial %}
+    <div class="alert alert-danger mt-4">
+      Техника с номером <strong>{{ request.GET.serial }}</strong> не найдена.
+    </div>
+  {% endif %}
+</div>
+
+<!-- Футер с контактами -->
+<div class="text-center text-muted mt-5">
+  📞 +7-8352-20-12-09 | <a href="https://t.me/silant_support" target="_blank">Telegram</a><br>
+  <small>© 2025 Мой Силант</small>
+</div>
+{% endblock %}

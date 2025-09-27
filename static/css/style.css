@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Astra+Sans:wght@400;700&display=swap');
+
+body {
+    font-family: 'PT Astra Sans', sans-serif;
+    background-color: #EBE6D6;
+    color: #163E6C;
+}
+
+/* Фирменные цвета */
+.text-primary {
+    color: #163E6C !important;
+}
+.btn-primary {
+    background-color: #163E6C;
+    border-color: #163E6C;
+}
+.btn-primary:hover {
+    background-color: #D20A11;
+    border-color: #D20A11;
+}
+.btn-outline-primary {
+    color: #163E6C;
+    border-color: #163E6C;
+}
+.btn-outline-primary:hover {
+    background-color: #163E6C;
+    color: #fff;
+}
+
+/* Карточка */
+.card {
+    border: 1px solid #163E6C;
+    border-radius: 8px;
+}
+
+/* Алерты */
+.alert-success {
+    border: 1px solid #163E6C;
+    background-color: #EBE6D6;
+    color: #163E6C;
+}
+.alert-danger {
+    border: 1px solid #D20A11;
+    background-color: #fff0f0;
+    color: #D20A11;
+}
