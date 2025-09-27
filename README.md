@@ -15,3 +15,4 @@ python manage.py runserver
 Хочешь, я сразу дам команды для git (`init`, `add`, `commit`, `push`) в одном блоке, чтобы ты скопировала и вставила?
 
 # -silant_project
+# silant_project
